@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import ifpb.edu.br.sineapplication.R;
 import ifpb.edu.br.sineapplication.listeners.OnClickListarSines;
-import ifpb.edu.br.sineapplication.listeners.OnClickSineCampinaGrande;
+import ifpb.edu.br.sineapplication.listeners.OnClickListarSinesCG;
 
 public class MainActivity extends Activity {
 
@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
 
-        btn1.setOnClickListener(new OnClickListarSines());
-        btn2.setOnClickListener(new OnClickSineCampinaGrande());
+        btn1.setOnClickListener(new OnClickListarSines(this));
+        btn2.setOnClickListener(new OnClickListarSinesCG(this));
     }
 }
