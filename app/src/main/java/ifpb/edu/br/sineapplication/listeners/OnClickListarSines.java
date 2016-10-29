@@ -23,10 +23,5 @@ public class OnClickListarSines implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(main, SinesActivity.class);
         main.startActivity(intent);
-        SinesAsyncTask sinesAsyncTask = new SinesAsyncTask();
-
-        sinesAsyncTask.execute("http://mobile-aceite.tcu.gov.br/mapa-da-saude/rest/emprego/");
-
-
     }
 }

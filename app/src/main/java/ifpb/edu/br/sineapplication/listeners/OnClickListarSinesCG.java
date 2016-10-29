@@ -23,8 +23,5 @@ public class OnClickListarSinesCG implements View.OnClickListener{
     public void onClick(View v) {
         Intent intent = new Intent(main, SinesCGActivity.class);
         main.startActivity(intent);
-        SinesCGAsyncTask sinesCGAsyncTask = new SinesCGAsyncTask();
-
-        sinesCGAsyncTask.execute("http://mobile-aceite.tcu.gov.br/mapa-da-saude/rest/emprego/latitude/-7.242662/longitude/-35.9716057/raio/100");
     }
 }

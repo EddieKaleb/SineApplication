@@ -127,18 +127,17 @@ public class Sine {
 
     @Override
     public String toString() {
-        return "Sine{" +
-                "codPosto='" + codPosto + '\'' +
-                ", nome='" + nome + '\'' +
-                ", entidadeConveniada='" + entidadeConveniada + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", cep='" + cep + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", municipio='" + municipio + '\'' +
-                ", uf='" + uf + '\'' +
-                ", lat=" + lat +
-                ", longitude=" + longitude +
-                '}';
+        return "\n Sine\n" +
+                "\n codPosto: " + codPosto + '\'' +
+                "\n nome: " + nome + '\'' +
+                "\n entidadeConveniada: " + entidadeConveniada + '\'' +
+                "\n endereco: " + endereco + '\'' +
+                "\n bairro: " + bairro + '\'' +
+                "\n cep: " + cep + '\'' +
+                "\n telefone: " + telefone + '\'' +
+                "\n municipio: " + municipio + '\'' +
+                "\n uf: " + uf + '\'' +
+                "\n lat: " + lat +
+                "\n longitude: " + longitude;
     }
 }

@@ -16,41 +16,45 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import ifpb.edu.br.sineapplication.activities.SinesCGActivity;
 import ifpb.edu.br.sineapplication.objects.Sine;
 
 /**
  * Created by root on 28/10/16.
  */
 
-public class SinesCGAsyncTask  extends AsyncTask<String, Void, List<Sine>> {
+public class SinesCodAsyncTask extends AsyncTask<String, String, String> {
+
     @Override
-    protected List<Sine> doInBackground(String... params) {
-        HttpURLConnection connection=null;
-        BufferedReader reader=null;
+    protected String doInBackground(String... params) {
+        HttpURLConnection connection = null;
+        BufferedReader reader = null;
         try {
-            URL urlBase=new URL(params[0]);
-            connection=(HttpURLConnection)urlBase.openConnection();
+
+            URL urlBase = new URL(params[0]);
+            connection = (HttpURLConnection) urlBase.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.connect();
 
-            InputStream stream=connection.getInputStream();
+            InputStream stream = connection.getInputStream();
 
-            reader=new BufferedReader(new InputStreamReader(stream));
+            reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 
-            StringBuffer buffer=new StringBuffer();
+            StringBuffer buffer = new StringBuffer();
 
-            String line="";
-            while((line=reader.readLine())!=null){
+            String line;
+            while ((line = reader.readLine()) != null) {
                 buffer.append(line);
             }
 
             String jsonString = buffer.toString();
 
             JSONArray jsonArray = new JSONArray(jsonString);
-            List<Sine> sines = new ArrayList<>();
+            Sine sine = new Sine();
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 String codPosto = jsonObject.getString("codPosto");
                 String nome = jsonObject.getString("nome");
                 String entidadeConveniada = jsonObject.getString("entidadeConveniada");
@@ -62,35 +66,34 @@ public class SinesCGAsyncTask  extends AsyncTask<String, Void, List<Sine>> {
                 String uf = jsonObject.getString("uf");
                 long lat = jsonObject.getLong("lat");
                 long longitude = jsonObject.getLong("long");
-                Sine sine = new Sine(codPosto, nome, entidadeConveniada, endereco, bairro, cep, telefone, municipio, uf, lat, longitude);
-                sines.add(sine);
+
+                sine = new Sine(codPosto, nome, entidadeConveniada, endereco, bairro, cep,
+                        telefone, municipio, uf, lat, longitude);
             }
 
-            return sines;
+            return sine.toString();
 
-
-        }catch(MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
-        }finally{
-            if(connection!=null)
+        } finally {
+            if (connection != null)
                 connection.disconnect();
-            try{
-                if(reader!=null)
+            try {
+                if (reader != null)
                     reader.close();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
 
     @Override
-    protected void onPostExecute(List <Sine> sines) {
-        super.onPostExecute(sines);
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
     }
 }

@@ -1,6 +1,8 @@
 package ifpb.edu.br.sineapplication.asynctasks;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,23 +24,27 @@ import ifpb.edu.br.sineapplication.objects.Sine;
  * Created by root on 27/10/16.
  */
 
-public class SinesAsyncTask extends AsyncTask<String, Void, List<Sine>> {
+public class SinesAsyncTask extends AsyncTask<String, String, List<Sine>> {
+
     @Override
     protected List<Sine> doInBackground(String... params) {
         HttpURLConnection connection=null;
         BufferedReader reader=null;
         try {
-            URL urlBase=new URL(params[0]);
-            connection=(HttpURLConnection)urlBase.openConnection();
+
+            URL urlBase = new URL(params[0]);
+            connection = (HttpURLConnection) urlBase.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
             connection.connect();
 
-            InputStream stream=connection.getInputStream();
+            InputStream stream = connection.getInputStream();
 
-            reader=new BufferedReader(new InputStreamReader(stream));
+            reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 
-            StringBuffer buffer=new StringBuffer();
+            StringBuffer buffer = new StringBuffer();
 
-            String line="";
+            String line;
             while((line=reader.readLine())!=null){
                 buffer.append(line);
             }
@@ -50,6 +56,7 @@ public class SinesAsyncTask extends AsyncTask<String, Void, List<Sine>> {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 String codPosto = jsonObject.getString("codPosto");
                 String nome = jsonObject.getString("nome");
                 String entidadeConveniada = jsonObject.getString("entidadeConveniada");
@@ -61,12 +68,13 @@ public class SinesAsyncTask extends AsyncTask<String, Void, List<Sine>> {
                 String uf = jsonObject.getString("uf");
                 long lat = jsonObject.getLong("lat");
                 long longitude = jsonObject.getLong("long");
-                Sine sine = new Sine(codPosto, nome, entidadeConveniada, endereco, bairro, cep, telefone, municipio, uf, lat, longitude);
+
+                Sine sine = new Sine(codPosto, nome, entidadeConveniada, endereco, bairro, cep,
+                        telefone, municipio, uf, lat, longitude);
                 sines.add(sine);
             }
 
             return sines;
-
 
         }catch(MalformedURLException e){
             e.printStackTrace();
@@ -84,14 +92,10 @@ public class SinesAsyncTask extends AsyncTask<String, Void, List<Sine>> {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
-
     @Override
-    protected void onPostExecute(List <Sine> sines) {
+    protected void onPostExecute(List<Sine> sines) {
         super.onPostExecute(sines);
-        SinesActivity.sines = sines;
-        SinesActivity.adapter.notifyDataSetChanged();
     }
 }
