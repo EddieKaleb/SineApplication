@@ -5,8 +5,6 @@ import android.view.View;
 
 import ifpb.edu.br.sineapplication.activities.MainActivity;
 import ifpb.edu.br.sineapplication.activities.SinesCGActivity;
-import ifpb.edu.br.sineapplication.asynctasks.SinesAsyncTask;
-import ifpb.edu.br.sineapplication.asynctasks.SinesCGAsyncTask;
 
 /**
  * Created by root on 27/10/16.

@@ -125,8 +125,11 @@ public class Sine {
         this.longitude = longitude;
     }
 
-    @Override
     public String toString() {
+        return codPosto.toUpperCase() +" / " +entidadeConveniada.toUpperCase() +"\n" + nome.toUpperCase();
+    }
+
+    public String toStringDetalhado() {
         return "\n Sine\n" +
                 "\n codPosto: " + codPosto + '\'' +
                 "\n nome: " + nome + '\'' +

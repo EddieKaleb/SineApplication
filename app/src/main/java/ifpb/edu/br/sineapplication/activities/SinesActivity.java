@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 
 import ifpb.edu.br.sineapplication.R;
 import ifpb.edu.br.sineapplication.asynctasks.SinesAsyncTask;
-import ifpb.edu.br.sineapplication.listeners.OnClickBuscarSine;
+import ifpb.edu.br.sineapplication.listeners.OnClickItem;
 import ifpb.edu.br.sineapplication.objects.Sine;
 
 public class SinesActivity extends Activity {
@@ -33,7 +33,7 @@ public class SinesActivity extends Activity {
         SinesAsyncTask sinesAsyncTask = new SinesAsyncTask();
 
         try {
-            sines =  sinesAsyncTask.execute("http://mobile-aceite.tcu.gov.br/mapa-da-saude/rest/emprego/").get();
+            sines =  sinesAsyncTask.execute("http://mobile-aceite.tcu.gov.br/mapa-da-saude/rest/emprego?quantidade=300").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -41,5 +41,7 @@ public class SinesActivity extends Activity {
         }
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1 , sines);
         lvSines.setAdapter(adapter);
+        lvSines.setOnItemClickListener(new OnClickItem(this));
+
     }
 }
