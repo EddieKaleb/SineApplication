@@ -14,14 +14,14 @@ public class ConnectionServer {
             "http://mobile-aceite.tcu.gov.br/mapa-da-saude/rest/";
 
 
-    private static SineService service;
+    private static APISine service;
     private static ConnectionServer ourInstance = new ConnectionServer();
 
     public static ConnectionServer getInstance() {
         return ourInstance;
     }
 
-    public SineService getService() {
+    public APISine getService() {
         return service;
     }
 
@@ -31,7 +31,7 @@ public class ConnectionServer {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        service = retrofit.create(SineService.class);
+        service = retrofit.create(APISine.class);
     }
 
 

@@ -13,13 +13,13 @@ import retrofit2.http.Path;
  * Created by root on 07/11/16.
  */
 
-public interface SineService {
+public interface APISine {
 
     @GET("emprego?quantidade=10000")
     Call<List<Sine>> getSines();
 
     @GET("emprego/cod/{codPosto}")
-    Call<List<Sine>> getSinesByCode(
+    Call<List<Sine>> getSineByCode(
             @Path("codPosto") String cod);
 
     @GET("emprego/latitude/{lat}/longitude/{long}/raio/{r}")
