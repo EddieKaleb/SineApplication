@@ -5,6 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DIGITE COD DO SINE:"
+        android:textSize="20dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTxtCod"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BUSCAR"
+        android:layout_gravity="center"
+        android:id="@+id/btnBuscar"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

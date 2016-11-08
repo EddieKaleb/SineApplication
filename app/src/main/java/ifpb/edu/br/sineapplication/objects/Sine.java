@@ -1,11 +1,14 @@
 package ifpb.edu.br.sineapplication.objects;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
 /**
  * Created by root on 28/10/16.
  */
 
 public class Sine {
-
 
     String codPosto;
     String nome;
@@ -16,14 +19,16 @@ public class Sine {
     String telefone;
     String municipio;
     String uf;
-    long lat;
-    long longitude;
+    @SerializedName("lat")
+    String lat;
+    @SerializedName("long")
+    String longitude;
 
     public Sine(){
 
     }
 
-    public Sine(String codPosto, String nome, String entidadeConveniada, String endereco, String bairro, String cep, String telefone, String municipio, String uf, long lat, long longitude) {
+    public Sine(String codPosto, String nome, String entidadeConveniada, String endereco, String bairro, String cep, String telefone, String municipio, String uf, String lat, String longitude) {
         this.codPosto = codPosto;
         this.nome = nome;
         this.entidadeConveniada = entidadeConveniada;
@@ -109,19 +114,18 @@ public class Sine {
         this.uf = uf;
     }
 
-    public float getLat() {
+    public String getLat() {
         return lat;
     }
 
-    public void setLat(long lat) {
-        this.lat = lat;
+    public void setLat(String lat) {this.lat = lat;
     }
 
-    public float getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
