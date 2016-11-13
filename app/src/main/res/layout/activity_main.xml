@@ -6,8 +6,8 @@
 
    <TextView android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="Menu Principal"
-       android:textSize="20dp"
+       android:text="TCU - Sines"
+       android:textSize="25dp"
        android:layout_gravity="center"
        android:id="@+id/tvMain"
        />
@@ -15,13 +15,20 @@
         android:layout_height="wrap_content"
         android:text="Todos os Sine's"
         android:layout_gravity="center"
-        android:id="@+id/btn1"
+        android:id="@+id/btnSines"
         />
 
     <Button android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="100km de Campina Grande "
-        android:id="@+id/btn3"
+        android:text="Campina Grande "
+        android:id="@+id/btnSinesCG"
+        />
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Ver no mapa"
+        android:id="@+id/btnMapa"
         />
 </LinearLayout>

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import ifpb.edu.br.sineapplication.R;
+import ifpb.edu.br.sineapplication.listeners.OnClickBuscar;
 import ifpb.edu.br.sineapplication.listeners.OnClickListarSines;
 import ifpb.edu.br.sineapplication.listeners.OnClickListarSinesCG;
+import ifpb.edu.br.sineapplication.listeners.OnClickMapa;
 
 public class MainActivity extends Activity {
 
@@ -16,11 +18,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        Button btn3 = (Button) findViewById(R.id.btn3);
+        Button btnSines = (Button) findViewById(R.id.btnSines);
+        Button btnSinesCG = (Button) findViewById(R.id.btnSinesCG);
+        Button btnMapa = (Button) findViewById(R.id.btnMapa);
 
-        btn1.setOnClickListener(new OnClickListarSines(this));
-        btn3.setOnClickListener(new OnClickListarSinesCG(this));
+        btnSines.setOnClickListener(new OnClickListarSines(this));
+        btnSinesCG.setOnClickListener(new OnClickListarSinesCG(this));
+        btnMapa.setOnClickListener(new OnClickMapa(this));
     }
 
 }
