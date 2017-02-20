@@ -66,7 +66,7 @@ public class OnClickMapaProx implements View.OnClickListener,LocationListener{
         } else {
 
             // Caso a permissão já conscentida atualizar a localização.
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 2, (LocationListener) main);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 2,this);
 
             if (locationManager != null) {
                 // Localização atualizada.
