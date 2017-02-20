@@ -83,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             double longLat = Double.parseDouble(sine.getLongitude());
                             mMap.addMarker(new MarkerOptions().position(
                                     new LatLng(lati,longLat))
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.factory))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
                                     .title(sine.getNome()));
                         }
                     }
