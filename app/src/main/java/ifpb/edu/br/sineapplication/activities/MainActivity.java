@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import ifpb.edu.br.sineapplication.R;
-import ifpb.edu.br.sineapplication.listeners.OnClickBuscar;
 import ifpb.edu.br.sineapplication.listeners.OnClickListarSines;
 import ifpb.edu.br.sineapplication.listeners.OnClickListarSinesCG;
-import ifpb.edu.br.sineapplication.listeners.OnClickMapa;
+import ifpb.edu.br.sineapplication.listeners.OnClickMapaProx;
 
 public class MainActivity extends Activity {
 
@@ -20,11 +19,12 @@ public class MainActivity extends Activity {
 
         Button btnSines = (Button) findViewById(R.id.btnSines);
         Button btnSinesCG = (Button) findViewById(R.id.btnSinesCG);
-        Button btnMapa = (Button) findViewById(R.id.btnMapa);
+        Button btnProx = (Button) findViewById(R.id.btnProx);
 
         btnSines.setOnClickListener(new OnClickListarSines(this));
         btnSinesCG.setOnClickListener(new OnClickListarSinesCG(this));
-        btnMapa.setOnClickListener(new OnClickMapa(this));
+        btnProx.setOnClickListener(new OnClickMapaProx(this));
+
     }
 
 }

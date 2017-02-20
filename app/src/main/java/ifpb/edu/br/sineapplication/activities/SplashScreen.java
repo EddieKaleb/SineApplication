@@ -2,12 +2,16 @@ package ifpb.edu.br.sineapplication.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Handler;
 
 import ifpb.edu.br.sineapplication.R;
 
 public class SplashScreen extends Activity implements Runnable{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,4 +26,5 @@ public class SplashScreen extends Activity implements Runnable{
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
+
 }

@@ -24,11 +24,12 @@
         android:text="Campina Grande "
         android:id="@+id/btnSinesCG"
         />
+
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Ver no mapa"
-        android:id="@+id/btnMapa"
+        android:text="Ver Sines próximos mapa"
+        android:id="@+id/btnProx"
         />
 </LinearLayout>

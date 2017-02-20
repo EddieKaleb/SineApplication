@@ -8,6 +8,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -25,7 +26,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private List<Sine> sines;
-    private LatLng latLng;
+    double latitude;
+    double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Bundle extras = getIntent().getExtras();
+        latitude = extras.getDouble("latitude");
+        longitude = extras.getDouble("longitude");
+
     }
 
 
@@ -49,27 +56,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+        LatLng myPlace = new LatLng(latitude,  longitude);
+        MarkerOptions centralPoint = new MarkerOptions()
+                .position(myPlace)
+                .title("Posição atual");
+
+        mMap.addMarker(centralPoint);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myPlace, 8));
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //Referencing the service's interface
                 APISine APISine = ConnectionServer.getInstance().getService();
                 //Calling the request method with two parameters
-                Call<List<Sine>> call = APISine.getSinesWithCoordinates(-7.242662,-35.971605,"100");
+                Call<List<Sine>> call = APISine.getSinesWithCoordinates(latitude,longitude,"100");
                 //Executing de request GET
                 call.enqueue(new Callback<List<Sine>>() {
                     @Override
                     public void onResponse(Call<List<Sine>> call, Response<List<Sine>> response) {
-                        if (response.isSuccessful()) {
-                            sines = response.body();
-                            for (int i=0; i<sines.size(); i++) {
-                                latLng = new LatLng(Double.parseDouble(sines.get(i).getLat()), Double.parseDouble(sines.get(i).getLongitude()));
-                                mMap.addMarker(new MarkerOptions().position(latLng).title(sines.get(i).getNome()));
-                            }
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                            Log.i("onResponse", "OK");
-                        } else {
-                            Log.i("onResponse", "ERRO");
+                        sines = response.body();
+                        for (Sine sine : sines) {
+                            double lati = Double.parseDouble(sine.getLat());
+                            double longLat = Double.parseDouble(sine.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(
+                                    new LatLng(lati,longLat))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.factory))
+                                    .title(sine.getNome()));
                         }
                     }
 
